@@ -1,0 +1,21 @@
+"Create an implementation of the rotational cipher, also sometimes called the Caesar cipher."
+def create_char_map(char_map: dict) -> dict:
+    "create a dictionary for the mappings"
+    for index in range(0,26):
+        char_map[chr(ord("a")+index)] = index
+    return char_map
+def rotate(text: str, key: int)->str:
+    "Rotates the string according to Caesar cipher."
+    char_map = {}
+    create_char_map(char_map)
+    result = ""
+    for character in text:
+        if character.isalpha():
+            if character.isupper():
+                lower_character=character.lower()
+                result+=chr(ord("a")+((char_map[lower_character]+key)%26)).upper()
+            else:
+                result+=chr(ord("a")+((char_map[character]+key)%26))
+        else:
+            result+=character
+    return result
